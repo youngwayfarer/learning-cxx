@@ -1,5 +1,6 @@
 #include "../exercise.h"
 #include <chrono>
+#include <future>
 #include <iostream>
 #include <numeric>
 #include <thread>
@@ -65,6 +66,37 @@ int main(int argc, char **argv) {
             std::cout << "Thread ID: " << std::this_thread::get_id() << std::endl;
         });
         t.join();
+    }
+    {
+        std::promise<int> p;
+        std::future<int> f = p.get_future();
+
+        std::thread t([&p]() {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            p.set_value_at_thread_exit(42);
+        });
+
+        ASSERT(f.get() == 42, "Future should get value 42 from promise");
+
+        t.join();
+    }
+    {
+        thread_local int thread_local_counter = 0;
+
+        auto inc_local = []() {
+            for (int i = 0; i < 1000; ++i) {
+                ++thread_local_counter;
+            }
+        };
+
+        std::thread t1(inc_local);
+        std::thread t2(inc_local);
+
+        t1.join();
+        t2.join();
+
+        ASSERT(thread_local_counter == 0,
+               "Thread local counter in main thread should remain 0");
     }
     return 0;
 }

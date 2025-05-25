@@ -141,3 +141,35 @@ target("exercise33")
     add_files("33_std_accumulate/main.cpp")
 
 -- TODO: lambda; deque; forward_list; fs; thread; mutex;
+
+-- lambda
+target("exercise34")
+    add_files("34_lambda/main.cpp")
+
+-- optional
+target("exercise35")
+    add_files("35_optional/main.cpp")
+
+-- variant
+target("exercise36")
+    add_files("36_variant/main.cpp")
+
+-- std::deque
+target("exercise37")
+    add_files("37_std_deque/main.cpp")
+
+-- std::forward_list
+target("exercise38")
+    add_files("38_std_forward_list/main.cpp")
+
+-- std::filesystem
+target("exercise39")
+    add_files("39_std_fs/main.cpp")
+
+-- std::thread
+target("exercise40")
+    add_files("40_std_thread/main.cpp")
+
+-- std::mutex
+target("exercise41")
+    add_files("41_std_mutex/main.cpp")

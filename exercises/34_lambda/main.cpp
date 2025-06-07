@@ -51,5 +51,25 @@ int main(int argc, char **argv) {
         };
         ASSERT(multiply_by_factor(2) == 20, "2 * 10 should be 20");
     }
+    {
+        // 递归 Lambda 表达式（计算阶乘）
+        std::function<int(int)> factorial;
+        // TODO: 替换下面的 ?，实现正确的 Lambda 表达式，计算阶乘
+        factorial = [?](int n) {
+            ?
+        };
+
+        ASSERT(factorial(0) == 1, "Factorial of 0 should be 1");
+        ASSERT(factorial(5) == 120, "5! should be 120");
+        ASSERT(factorial(7) == 5040, "7! should be 5040");
+
+        // 递归 Lambda 表达式（fibonacci 数列）
+        // TODO: 替换下面的 ?，实现正确的 Lambda 表达式，计算 fibonacci 数列
+        std::function<int(int)> fib;
+        fib = [?](int n) {
+            ?
+        };
+        ASSERT(fib(7) == 13, "7th Fibonacci number should be 13");
+    }
     return 0;
 }

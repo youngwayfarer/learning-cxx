@@ -42,5 +42,21 @@ int main(int argc, char **argv) {
         ASSERT(?, "填入 opt_value.has_value() 或 !opt_value.has_value()");
         ASSERT(opt_value ? std::nullopt, "填入 == 或 !=y");
     }
+    {
+        // 测试移动构造和赋值
+        std::optional<std::string> original("Hello World");
+        std::optional<std::string> moved = std::move(original);
+        original.reset();
+        // TODO: 为 ? 填写正确的值
+        ASSERT(original ? std::nullopt, "填入 == 或 !=");
+        ASSERT(?, "填入 moved.has_value() 或 !moved.has_value()");
+    }
+    {
+        // 测试 make_optional
+        auto str_opt = std::make_optional<std::string>(5, 'c');
+        ASSERT(str_opt.has_value(), "make_optional should create value");
+        // TODO: 为 ? 填写正确的值
+        ASSERT(*str_opt == ?, "填入正确的字符串值");
+    }
     return 0;
 }

@@ -42,5 +42,26 @@ int main(int argc, char **argv) {
         }
         ASSERT(sum == ?, "Sum of elements should be ?");
     }
+    {
+        // 比较运算符测试
+        std::deque<int> dq1 = {1, 2, 3};
+        std::deque<int> dq2 = {1, 2, 3};
+        std::deque<int> dq3 = {1, 2, 4};
+
+        ASSERT(dq1 ? dq2, "填入正确的比较运算符，== 或 != 或 < 或 >");
+        ASSERT(dq1 ? dq3, "填入正确的比较运算符，== 或 != 或 < 或 >");
+        ASSERT(dq1 ? dq3, "填入正确的比较运算符，== 或 != 或 < 或 >");
+    }
+    {
+        // swap测试
+        std::deque<int> dq1 = {1, 2, 3};
+        std::deque<int> dq2 = {4, 5};
+
+        dq1.swap(dq2);
+
+        // TODO: 为 ? 填写正确的值
+        ASSERT(dq1.size() == ? && dq1[0] == ? && dq1[1] == ?, "the contents of dq1 should be ?");
+        ASSERT(dq2.size() == ? && dq2[0] == ? && dq2[1] == ? && dq2[2] == ?, "the contents of dq2 should be ?");
+    }
     return 0;
 }

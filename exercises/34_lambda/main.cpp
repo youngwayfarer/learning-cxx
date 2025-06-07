@@ -63,5 +63,23 @@ int main(int argc, char **argv) {
         factor = 5;
         ASSERT(multiply_by_factor(2) == 20, "Captured factor should not change");
     }
+    {
+        // 测试递归Lambda表达式（计算阶乘）
+        std::function<int(int)> factorial;
+        factorial = [&factorial](int n) {
+            return n <= 1 ? 1 : n * factorial(n - 1);
+        };
+
+        ASSERT(factorial(0) == 1, "Factorial of 0 should be 1");
+        ASSERT(factorial(5) == 120, "5! should be 120");
+        ASSERT(factorial(7) == 5040, "7! should be 5040");
+
+        // 测试递归Lambda的闭包特性
+        std::function<int(int)> fib;
+        fib = [&fib](int n) {
+            return n <= 2 ? 1 : fib(n - 1) + fib(n - 2);
+        };
+        ASSERT(fib(7) == 13, "7th Fibonacci number should be 13");
+    }
     return 0;
 }

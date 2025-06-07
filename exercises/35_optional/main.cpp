@@ -1,5 +1,4 @@
 #include "../exercise.h"
-#include <iostream>
 #include <optional>
 #include <vector>
 
@@ -45,6 +44,21 @@ int main(int argc, char **argv) {
         opt_value.reset();// 清除值
         ASSERT(!opt_value.has_value(), "Optional should have no value after reset");
         ASSERT(opt_value == std::nullopt, "Optional should be equal to std::nullopt when empty");
+    }
+    {
+        // 测试移动构造和赋值
+        std::optional<std::string> original("Hello World");
+        std::optional<std::string> moved = std::move(original);
+        original.reset();
+        ASSERT(original == std::nullopt, "Original optional should be empty after move");
+        ASSERT(moved.has_value(), "Moved optional should have value");
+        ASSERT(moved.value() == "Hello World", "Moved value should be preserved");
+    }
+    {
+        // 测试 make_optional
+        auto str_opt = std::make_optional<std::string>(5, 'c');
+        ASSERT(str_opt.has_value(), "make_optional should create value");
+        ASSERT(*str_opt == "ccccc", "make_optional should use correct constructor");
     }
     return 0;
 }

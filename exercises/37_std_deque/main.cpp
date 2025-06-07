@@ -41,5 +41,25 @@ int main(int argc, char **argv) {
         }
         ASSERT(sum == 60, "Sum of elements should be 60");
     }
+    {
+        // 比较运算符测试
+        std::deque<int> dq1 = {1, 2, 3};
+        std::deque<int> dq2 = {1, 2, 3};
+        std::deque<int> dq3 = {1, 2, 4};
+
+        ASSERT(dq1 == dq2, "Equal deques should compare equal");
+        ASSERT(dq1 != dq3, "Different deques should compare unequal");
+        ASSERT(dq1 < dq3, "Lexicographical comparison should work");
+    }
+    {
+        // swap测试
+        std::deque<int> dq1 = {1, 2, 3};
+        std::deque<int> dq2 = {4, 5};
+
+        dq1.swap(dq2);
+
+        ASSERT(dq1.size() == 2 && dq1[0] == 4 && dq1[1] == 5, "Swap should exchange contents");
+        ASSERT(dq2.size() == 3 && dq2[0] == 1 && dq2[1] == 2 && dq2[2] == 3, "Original deque should have swapped contents");
+    }
     return 0;
 }

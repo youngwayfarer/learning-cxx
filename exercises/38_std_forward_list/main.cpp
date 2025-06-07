@@ -35,5 +35,46 @@ int main(int argc, char **argv) {
         }
         ASSERT(sum == 60, "Sum of elements should be 60");
     }
+    {
+        // 合并与排序
+        std::forward_list<int> fl1 = {3, 5, 7};
+        std::forward_list<int> fl2 = {2, 4, 6};
+
+        fl1.merge(fl2);// 合并后应为 {2, 3, 4, 5, 6, 7}
+
+        int expected[] = {2, 3, 4, 5, 6, 7};
+        int index = 0;
+        for (int val : fl1) {
+            ASSERT(val == expected[index++], "Merged list should be sorted");
+        }
+        ASSERT(fl2.empty(), "Merged list should be empty after merge");
+    }
+    {
+        // 拼接操作
+        std::forward_list<int> fl1 = {1, 2, 3, 4};
+        std::forward_list<int> fl2 = {10, 20};
+
+        auto it = fl1.begin();
+        ++it;// 指向第二个元素
+        fl1.splice_after(it, fl2, fl2.before_begin(), fl2.end());
+
+        // fl1 应为 {1, 2, 10, 20, 3, 4}
+        int expected[] = {1, 2, 10, 20, 3, 4};
+        int index = 0;
+        for (int val : fl1) {
+            ASSERT(val == expected[index++], "Splice_after should insert elements correctly");
+        }
+        ASSERT(fl2.empty(), "Spliced list should be empty after operation");
+    }
+    {
+        // 比较运算符测试
+        std::forward_list<int> fl1 = {1, 2, 3};
+        std::forward_list<int> fl2 = {1, 2, 3};
+        std::forward_list<int> fl3 = {1, 2, 4};
+
+        ASSERT(fl1 == fl2, "Equal lists should compare equal");
+        ASSERT(fl1 != fl3, "Different lists should compare unequal");
+        ASSERT(fl1 < fl3, "Lexicographical comparison should work");
+    }
     return 0;
 }
